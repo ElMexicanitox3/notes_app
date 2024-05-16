@@ -1,0 +1,1 @@
+export 'package:notes_app/widgets/note_widget.dart';
