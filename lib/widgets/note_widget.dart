@@ -5,16 +5,16 @@ class NoteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return const SizedBox(
       width: double.infinity, // Ancho infinito
-      child: const Card(
+      child: Card(
         color: Colors.amber,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 4),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 15.0),
+              SizedBox(height: 15.0),
               Text(
                 'Note Title',
               ),
@@ -22,7 +22,7 @@ class NoteWidget extends StatelessWidget {
               Text(
                 'Note Content',
               ),
-              const SizedBox(height: 15.0),
+              SizedBox(height: 15.0),
 
             ],
           ),
