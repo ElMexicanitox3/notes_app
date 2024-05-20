@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/models/note_model.dart';
 
 class NoteWidget extends StatelessWidget {
-  const NoteWidget({super.key});
+
+  final Note note;
+
+  const NoteWidget({super.key, required this.note});
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       width: double.infinity, // Ancho infinito
       child: Card(
         color: Colors.amber,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 4),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 15.0),
+              const SizedBox(height: 15.0),
               Text(
-                'Note Title',
+                note.title,
               ),
-              SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
               Text(
-                'Note Content',
+                note.content,
               ),
-              SizedBox(height: 15.0),
-
+              const SizedBox(height: 15.0),
             ],
           ),
         ),

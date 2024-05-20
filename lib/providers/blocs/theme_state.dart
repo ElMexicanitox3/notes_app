@@ -1,7 +1,6 @@
 // theme_state.dart
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:notes_app/themes/app_themes.dart';
 
 abstract class ThemeState extends Equatable {
   final ThemeData themeData;
