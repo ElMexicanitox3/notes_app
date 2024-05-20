@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/constants/words.dart';
 import 'package:notes_app/models/note_model.dart';
-import 'package:notes_app/providers/blocs/theme_bloc.dart';
-import 'package:notes_app/providers/blocs/theme_event.dart';
+import 'package:notes_app/screens/home/components/menu.dart';
+import 'package:notes_app/screens/home/components/search_bar.dart';
+import 'package:notes_app/themes/app_themes.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -18,141 +17,86 @@ class Homescreen extends StatelessWidget {
 
 
     return Scaffold(
-      
       key: _scaffoldKey,
+      drawer: const MenuWidget(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40),
+        ),
         onPressed: () {
-          // Acción cuando se presiona el botón
+          Navigator.pushNamed(context, "/add-note");
         },
+        backgroundColor: AppThemes.primary,
         child: const Icon(Icons.add),
       ),
-      drawer: Drawer(
-        
-        semanticLabel: "Menu",
-        
-        child: Column(
+      bottomNavigationBar: BottomAppBar(
+        color: AppThemes.secondary,
+        // notchMargin: 10,
+        // shape: const CircularNotchedRectangle(),
+        height: 60,
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            
-            const UserAccountsDrawerHeader(
-              accountName: Text('User Name'),
-              accountEmail: Text('Email Address'),
-              currentAccountPicture: CircleAvatar(
-                child: FlutterLogo(size: 42.0),
-              ),
-            ),
-
-            // List tile selected
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Notes'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-              selected: true,
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: ListTile(
-                  leading: const Icon(Icons.add),
-                  title: const Text('Add Note'),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-            ),
-
-            // divider
-            const Divider(),
-
             // config
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () {
-                Navigator.pop(context);
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                // Navigator.pushNamed(context, "/config");
               },
+              color: AppThemes.primary,
             ),
 
-
+            // camera
+            IconButton(
+              icon: const Icon(Icons.camera_alt),
+              onPressed: () {
+                // Navigator.pushNamed(context, "/camera");
+              },
+              color: AppThemes.primary,
+            ),
             
-
-
-            // icon on bottom
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: IconButton(
-                    icon: const Icon(Icons.brightness_4),
-                    onPressed: () {
-                      BlocProvider.of<ThemeBloc>(context).add(ToggleThemeEvent());
-                    },
-                  ),
-                ),
-              ),
-            ),
-
-
+           
+            
           ],
         ),
+      ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              "Notes App",
+              style: TextStyle(
+                color: AppThemes.primary,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            Switch(
+              activeThumbImage: const AssetImage("lib/assets/img/moon.png"),
+              inactiveThumbImage: const AssetImage("lib/assets/img/sun.png"),
+              inactiveThumbColor: AppThemes.secondary,
+              value: false,
+              onChanged: (value) {
+                // BlocProvider.of<ThemeBloc>(context).add(
+                //   value ? DarkThemeEvent() : LightThemeEvent()
+                // );
+              },
+            ),
+          ],
+        ),
+        
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            const SizedBox(height: 45.0), // Espacio en blanco (16.0 es el tamaño del espacio en blanco
             
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: SizedBox(
-                width: double.infinity,
-                child: Card(
-                  color: Colors.grey[200],
-                  child: Row(
-                    children: [
-                      
-                      IconButton(
-                        icon: const Icon(Icons.menu),
-                        onPressed: () {
-                          _scaffoldKey.currentState?.openDrawer();  // Abre el Drawer usando la GlobalKey
-                        },
-                      ),
-            
-                      const Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: Words.searchEn,
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                          ),
-                        ),
-                      ),
-            
-                      IconButton(
-                        icon: const Icon(Icons.sort),
-                        onPressed: () {},
-                      ),
-            
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            
-            // un buscador
-            const SizedBox(height: 16.0), // Espacio en blanco (16.0 es el tamaño del espacio en blanco
-        
-            const SizedBox(height: 16.0),
-            
-            // Note().notes.map((e) => NoteWidget(note: e)).toList()
+            const SearchBarCustom(),
+
             ...Note.notes.map(
               (e) => NoteWidget(note: e)
             ),
@@ -162,3 +106,4 @@ class Homescreen extends StatelessWidget {
     );
   }
 }
+
