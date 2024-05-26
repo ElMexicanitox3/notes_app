@@ -23,6 +23,10 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: state.themeData,
+            routes: {
+              "/home": (context) => Homescreen(),
+              "/add_note": (context) => AddNote(),
+            },
             home: Homescreen()
           );
         },

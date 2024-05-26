@@ -1,10 +1,12 @@
 class Note {
-  final String title;
-  final String content;
+  final int? id;
+  final String? title;
+  final String? content;
 
   Note({
-    required this.title,
-    required this.content,
+    this.id,
+    this.title,
+    this.content,
   });
 
   static List<Note> get notes => [

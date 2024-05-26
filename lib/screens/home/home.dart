@@ -25,7 +25,12 @@ class Homescreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(40),
         ),
         onPressed: () {
-          Navigator.pushNamed(context, "/add-note");
+          // TODO - Add note
+
+          Navigator.pushNamed(context, "/add_note");
+
+
+
         },
         backgroundColor: AppThemes.primary,
         child: const Icon(Icons.add),
@@ -55,9 +60,7 @@ class Homescreen extends StatelessWidget {
               },
               color: AppThemes.primary,
             ),
-            
-           
-            
+                        
           ],
         ),
       ),
