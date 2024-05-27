@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:notes_app/models/note_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -54,11 +55,33 @@ class DBProvider {
     );
   }
 
+  // Insert a new note
+  Future<int> insertNote(Note note) async {
+    final db = await instance.database;
+    return await db.insert('notes', note.toJson());
+  }
+
+  // Update an existing note
+  Future<int> updateNote(Note note) async {
+    final db = await instance.database;
+    return await db.update(
+      'notes',
+      note.toJson(),
+      where: 'id = ?',
+      whereArgs: [note.id],
+    );
+  }
+
+  // Get all notes
+  Future<List<Note>> getNotes() async {
+    final db = await instance.database;
+    final result = await db.query('notes');
+    return result.map((json) => Note.fromJson(json)).toList();
+  }
+
   // Close the database
   Future close() async {
     final db = await instance.database;
     db.close();
   }
-
-
 }

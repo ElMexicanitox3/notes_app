@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants/words.dart';
+import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/providers/sqflite/connection.dart';
 
 class AddNote extends StatelessWidget {
   
   AddNote({super.key});
 
-
   String? _title;
   String? _content;
+  Note? _note;
 
   void _save(){
     print("Save note");
     print("Title: $_title");
     print("Content: $_content");
+
+    if(_title == null && _content == null){
+      return;
+    }
+    
+    _note = Note(
+      title: _title ?? "",
+      content: _content,
+      createdAt: DateTime.now().toString(),
+    );
+
+    // Save note to database
+    DBProvider.instance.insertNote(_note!);
+    
   }
 
   @override
