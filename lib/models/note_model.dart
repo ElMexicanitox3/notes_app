@@ -2,11 +2,15 @@ class Note {
   final int? id;
   final String? title;
   final String? content;
+  final String? createdAt;
+  final String? updatedAt;
 
   Note({
     this.id,
     this.title,
     this.content,
+    this.createdAt,
+    this.updatedAt,
   });
 
   static List<Note> get notes => [

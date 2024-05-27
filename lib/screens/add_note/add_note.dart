@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants/words.dart';
-import 'package:notes_app/models/note_model.dart';
 
 class AddNote extends StatelessWidget {
   
@@ -50,13 +49,7 @@ class AddNote extends StatelessWidget {
                   border: InputBorder.none,
                 ),
               ),
-    
-              ElevatedButton(
-                onPressed: () {
-                  // TODO - Save note
-                },
-                child: const Text("Save"),
-              ),
+
             ],
           ),
         )
