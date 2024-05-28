@@ -6,8 +6,6 @@ class SearchBarCustom extends StatelessWidget {
     super.key,
   });
 
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(

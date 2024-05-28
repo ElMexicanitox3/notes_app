@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/providers/blocs/theme_bloc.dart';
-import 'package:notes_app/providers/blocs/theme_event.dart';
+import 'package:notes_app/providers/blocs/theme_bloc/theme_bloc.dart';
+import 'package:notes_app/providers/blocs/theme_bloc/theme_event.dart';
 
 class MenuWidget extends StatelessWidget {
   const MenuWidget({

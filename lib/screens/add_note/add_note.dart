@@ -12,10 +12,7 @@ class AddNote extends StatelessWidget {
   Note? _note;
 
   void _save(){
-    print("Save note");
-    print("Title: $_title");
-    print("Content: $_content");
-
+  
     if(_title == null && _content == null){
       return;
     }

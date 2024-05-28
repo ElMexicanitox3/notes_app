@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/screens/screens.dart';
-
-import 'providers/blocs/theme_bloc.dart';
-import 'providers/blocs/theme_state.dart';
+import 'providers/blocs/theme_bloc/theme_bloc.dart';
+import 'providers/blocs/theme_bloc/theme_state.dart';
+import 'providers/blocs/notes_bloc/note_bloc.dart'; // Asegúrate de importar correctamente tu NotesBloc
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +12,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ThemeBloc>(
+          create: (context) => ThemeBloc(),
+        ),
+        BlocProvider<NotesBloc>(
+          create: (context) => NotesBloc(),
+        ),
+      ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
@@ -27,7 +33,7 @@ class MyApp extends StatelessWidget {
               "/home": (context) => Homescreen(),
               "/add_note": (context) => AddNote(),
             },
-            home: Homescreen()
+            home: Homescreen(),
           );
         },
       ),
