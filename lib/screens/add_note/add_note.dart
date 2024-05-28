@@ -16,7 +16,7 @@ class AddNote extends StatelessWidget {
     if(_title == null && _content == null){
       return;
     }
-    
+
     _note = Note(
       title: _title ?? "",
       content: _content,
@@ -42,7 +42,6 @@ class AddNote extends StatelessWidget {
           child: Column(
             children: [
               
-    
               TextField(
                 onChanged: (value){
                   _title = value;

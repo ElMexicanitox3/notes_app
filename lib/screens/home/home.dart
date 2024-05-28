@@ -54,10 +54,10 @@ class Homescreen extends StatelessWidget {
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               "Notes App",
               style: TextStyle(
                 color: AppThemes.primary,
@@ -66,6 +66,17 @@ class Homescreen extends StatelessWidget {
               ),
             ),
             // Switch for theme change, implement functionality based on ThemeBloc
+            Switch(
+              activeThumbImage: const AssetImage("lib/assets/img/moon.png"),
+              inactiveThumbImage: const AssetImage("lib/assets/img/sun.png"),
+              inactiveThumbColor: AppThemes.secondary,
+              value: false,
+              onChanged: (value) {
+                // BlocProvider.of<ThemeBloc>(context).add(
+                //   value ? DarkThemeEvent() : LightThemeEvent()
+                // );
+              },
+            ),
           ],
         ),
       ),
