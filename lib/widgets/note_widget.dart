@@ -15,7 +15,7 @@ class NoteWidget extends StatelessWidget {
       child: Card(
         color: AppThemes.secondary,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -24,6 +24,8 @@ class NoteWidget extends StatelessWidget {
                 note.title ?? "",
                 style: const TextStyle(
                   color: AppThemes.primary,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 )
               ),
               const SizedBox(height: 8.0),

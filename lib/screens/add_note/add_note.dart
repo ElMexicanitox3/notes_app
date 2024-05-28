@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/constants/words.dart';
 import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/providers/blocs/notes_bloc/note_bloc.dart';
+import 'package:notes_app/providers/blocs/notes_bloc/note_event.dart';
 import 'package:notes_app/providers/sqflite/connection.dart';
 
 class AddNote extends StatelessWidget {
@@ -11,7 +14,7 @@ class AddNote extends StatelessWidget {
   String? _content;
   Note? _note;
 
-  void _save(){
+  void _save(BuildContext context){
   
     if(_title == null && _content == null){
       return;
@@ -24,7 +27,7 @@ class AddNote extends StatelessWidget {
     );
 
     // Save note to database
-    DBProvider.instance.insertNote(_note!);
+    context.read<NotesBloc>().add(AddNoteEvent(_note!));
     
   }
 
@@ -32,7 +35,7 @@ class AddNote extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: true,
-      onPopInvoked: (didPop) => _save(),
+      onPopInvoked: (didPop) => _save(context),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Add Note"),

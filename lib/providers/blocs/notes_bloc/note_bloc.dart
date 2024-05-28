@@ -15,11 +15,7 @@ class NotesBloc extends Bloc<NoteEvent, NoteState>{
   Future<void> _onGetNotes(GetNotesEvent event, Emitter<NoteState> emit) async {
     try {
       List<Note>? notes = await DBProvider.instance.getNotes();
-      // print(notes);
-      // convertirmos la lista de notas en un estado de notas
-      
       emit(NoteState(notes));
-      
     } catch (error) {
       // Aquí puedes manejar errores, por ejemplo, enviando un estado de error
       emit(const NoteState([]));
