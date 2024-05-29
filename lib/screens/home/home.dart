@@ -91,7 +91,14 @@ class Homescreen extends StatelessWidget {
                   return const Text("No notes found.");
                 }
                 return Column(
-                  children: state.notes.map((note) => NoteWidget(note: note)).toList(),
+                  children: state.notes.map(
+                    (note) => InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, "/add_note", arguments: note);
+                      },
+                      child: NoteWidget(note: note)
+                    )
+                  ).toList(),
                 );
               },
             ),

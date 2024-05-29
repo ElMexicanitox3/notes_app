@@ -34,5 +34,9 @@ class NotesBloc extends Bloc<NoteEvent, NoteState>{
     }
   }
 
+  // Handler para guardar la nota a actualizar
+
+
+
 
 }

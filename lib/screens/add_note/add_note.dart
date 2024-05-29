@@ -4,70 +4,93 @@ import 'package:notes_app/constants/words.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/providers/blocs/notes_bloc/note_bloc.dart';
 import 'package:notes_app/providers/blocs/notes_bloc/note_event.dart';
-import 'package:notes_app/providers/sqflite/connection.dart';
 
-class AddNote extends StatelessWidget {
-  
-  AddNote({super.key});
+class AddNote extends StatefulWidget {
+  final Note? updateNote;
 
-  String? _title;
-  String? _content;
-  Note? _note;
+  AddNote({super.key, this.updateNote});
 
-  void _save(BuildContext context){
-  
-    if(_title == null && _content == null){
+  @override
+  _AddNoteState createState() => _AddNoteState();
+}
+
+class _AddNoteState extends State<AddNote> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _contentController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.updateNote != null) {
+      _titleController.text = widget.updateNote!.title ?? "";
+      _contentController.text = widget.updateNote!.content ?? "";
+    }
+  }
+
+  void _save(BuildContext context) {
+    final String title = _titleController.text.trim();
+    final String content = _contentController.text.trim();
+
+    if (title.isEmpty && content.isEmpty) {
       return;
     }
 
-    _note = Note(
-      title: _title ?? "",
-      content: _content,
-      createdAt: DateTime.now().toString(),
+    final Note note = Note(
+      id: widget.updateNote?.id,
+      title: title,
+      content: content,
+      createdAt: widget.updateNote?.createdAt ?? DateTime.now().toString(),
+      updatedAt: DateTime.now().toString(),
     );
 
-    // Save note to database
-    context.read<NotesBloc>().add(AddNoteEvent(_note!));
-    
+    // if (widget.updateNote == null) {
+    //   context.read<NotesBloc>().add(AddNoteEvent(note));
+    // } else {
+    //   context.read<NotesBloc>().add(UpdateNoteEvent(note));
+    // }
+
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: true,
-      onPopInvoked: (didPop) => _save(context),
+    return WillPopScope(
+      onWillPop: () async {
+        _save(context);
+        return true;
+      },
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Add Note"),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              _save(context);
+              Navigator.of(context).pop();
+            },
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              
               TextField(
-                onChanged: (value){
-                  _title = value;
-                },
+                controller: _titleController,
                 decoration: const InputDecoration(
                   hintText: Words.titleEn,
                   border: InputBorder.none,
                 ),
               ),
-              
               TextField(
-                onChanged: (value) {
-                  _content = value;
-                },
+                controller: _contentController,
                 decoration: const InputDecoration(
                   hintText: Words.noteEn,
                   border: InputBorder.none,
                 ),
               ),
-
             ],
           ),
-        )
+        ),
       ),
     );
   }
