@@ -63,23 +63,34 @@ class _AddNoteState extends State<AddNote> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TextField(
-                controller: _titleController,
-                decoration: const InputDecoration(
-                  hintText: Words.titleEn,
-                  border: InputBorder.none,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+            
+            
+                TextField(
+                  controller: _titleController,
+                  maxLines: 1,
+                  keyboardType: TextInputType.multiline,
+                  decoration: const InputDecoration(
+                    hintText: Words.titleEn,
+                    border: InputBorder.none,
+                  ),
                 ),
-              ),
-              TextField(
-                controller: _contentController,
-                decoration: const InputDecoration(
-                  hintText: Words.noteEn,
-                  border: InputBorder.none,
+            
+                TextField(
+                  controller: _contentController,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: Words.noteEn,
+                    border: InputBorder.none,
+                  ),
+                  keyboardType: TextInputType.multiline,
                 ),
-              ),
-            ],
+            
+            
+              ],
+            ),
           ),
         ),
       ),
