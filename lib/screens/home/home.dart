@@ -54,29 +54,38 @@ class Homescreen extends StatelessWidget {
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        toolbarHeight: 120,
+        backgroundColor: AppThemes.w,
+        title: Column(
           children: [
-            const Text(
-              "Notes App",
-              style: TextStyle(
-                color: AppThemes.primary,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Notes App",
+                  style: TextStyle(
+                    color: AppThemes.primary,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                // Switch for theme change, implement functionality based on ThemeBloc
+                Switch(
+                  activeThumbImage: const AssetImage("lib/assets/img/moon.png"),
+                  inactiveThumbImage: const AssetImage("lib/assets/img/sun.png"),
+                  inactiveThumbColor: AppThemes.secondary,
+                  value: false,
+                  onChanged: (value) {
+                    // BlocProvider.of<ThemeBloc>(context).add(
+                    //   value ? DarkThemeEvent() : LightThemeEvent()
+                    // );
+                  },
+                ),
+              ],
             ),
-            // Switch for theme change, implement functionality based on ThemeBloc
-            Switch(
-              activeThumbImage: const AssetImage("lib/assets/img/moon.png"),
-              inactiveThumbImage: const AssetImage("lib/assets/img/sun.png"),
-              inactiveThumbColor: AppThemes.secondary,
-              value: false,
-              onChanged: (value) {
-                // BlocProvider.of<ThemeBloc>(context).add(
-                //   value ? DarkThemeEvent() : LightThemeEvent()
-                // );
-              },
-            ),
+
+            const SearchBarCustom(),
+
           ],
         ),
       ),
@@ -84,7 +93,6 @@ class Homescreen extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            const SearchBarCustom(),
             BlocBuilder<NotesBloc, NoteState>(
               builder: (context, state) {
                 if (state.notes.isEmpty) {
