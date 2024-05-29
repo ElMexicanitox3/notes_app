@@ -28,6 +28,7 @@ class _AddNoteState extends State<AddNote> {
   }
 
   void _save(BuildContext context) {
+
     final String title = _titleController.text.trim();
     final String content = _contentController.text.trim();
 
@@ -43,32 +44,22 @@ class _AddNoteState extends State<AddNote> {
       updatedAt: DateTime.now().toString(),
     );
 
-    // if (widget.updateNote == null) {
-    //   context.read<NotesBloc>().add(AddNoteEvent(note));
-    // } else {
-    //   context.read<NotesBloc>().add(UpdateNoteEvent(note));
-    // }
+    if (widget.updateNote == null) {
+      context.read<NotesBloc>().add(AddNoteEvent(note));
+    } else {
+      context.read<NotesBloc>().add(UpdateNoteEvent(note));
+    }
 
-    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        _save(context);
-        return true;
-      },
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) => _save(context),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Add Note"),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              _save(context);
-              Navigator.of(context).pop();
-            },
-          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),

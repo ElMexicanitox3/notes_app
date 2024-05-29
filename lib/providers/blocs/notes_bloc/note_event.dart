@@ -18,3 +18,12 @@ class AddNoteEvent extends NoteEvent {
   @override
   List<Object> get props => [note];
 }
+
+class UpdateNoteEvent extends NoteEvent {
+  final Note note;
+
+  const UpdateNoteEvent(this.note);
+
+  @override
+  List<Object> get props => [note];
+}
