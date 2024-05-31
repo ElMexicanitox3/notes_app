@@ -9,14 +9,12 @@ import 'package:notes_app/themes/app_themes.dart';
 import '../../widgets/widgets.dart';
 
 class Homescreen extends StatelessWidget {
-  
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Homescreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     // Disparar la carga de notas al abrir la pantalla
     context.read<NotesBloc>().add(GetNotesEvent());
 
@@ -24,33 +22,54 @@ class Homescreen extends StatelessWidget {
       key: _scaffoldKey,
       drawer: const MenuWidget(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40),
-        ),
-        onPressed: () {
-          Navigator.pushNamed(context, "/add_note");
+      floatingActionButton: BlocBuilder<NotesBloc, NoteState>(
+        builder: (context, state) {
+          return FloatingActionButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, "/add_note");
+            },
+            backgroundColor: state.selectedNotes.isEmpty? AppThemes.primary : AppThemes.delete,
+            child: state.selectedNotes.isEmpty? const Icon(Icons.add) : const Icon(Icons.delete),
+          );
         },
-        backgroundColor: AppThemes.primary,
-        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
         color: AppThemes.secondary,
         height: 60,
-        child: Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {}, // Navigation code here
-              color: AppThemes.primary,
-            ),
-            IconButton(
-              icon: const Icon(Icons.camera_alt),
-              onPressed: () {}, // Navigation code here
-              color: AppThemes.primary,
-            ),
-          ],
-        ),
+        child: BlocBuilder<NotesBloc, NoteState>(builder: (context, state) {
+          if (state.selectedNotes.isEmpty) {
+            return Row(children: [
+              IconButton(
+                icon: const Icon(Icons.settings),
+                onPressed: () {}, // Navigation code here
+                color: AppThemes.primary,
+              ),
+              IconButton(
+                icon: const Icon(Icons.camera_alt),
+                onPressed: () {}, // Navigation code here
+                color: AppThemes.primary,
+              ),
+            ]);
+          }
+          return Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () {
+                  context.read<NotesBloc>().add(DeselectAllNotesEvent());
+                },
+                color: AppThemes.primary,
+              ),
+              Text(
+                "${state.selectedNotes.length} Selected",
+                style: TextStyle(fontSize: 20, color: AppThemes.primary),
+              )
+            ],
+          );
+        }),
       ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -72,7 +91,8 @@ class Homescreen extends StatelessWidget {
                 // Switch for theme change, implement functionality based on ThemeBloc
                 Switch(
                   activeThumbImage: const AssetImage("lib/assets/img/moon.png"),
-                  inactiveThumbImage: const AssetImage("lib/assets/img/sun.png"),
+                  inactiveThumbImage:
+                      const AssetImage("lib/assets/img/sun.png"),
                   inactiveThumbColor: AppThemes.secondary,
                   value: false,
                   onChanged: (value) {
@@ -83,9 +103,7 @@ class Homescreen extends StatelessWidget {
                 ),
               ],
             ),
-
             const SearchBarCustom(),
-
           ],
         ),
       ),
@@ -99,14 +117,32 @@ class Homescreen extends StatelessWidget {
                   return const Text("No notes found.");
                 }
                 return Column(
-                  children: state.notes.map(
-                    (note) => InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, "/add_note", arguments: note);
-                      },
-                      child: NoteWidget(note: note)
-                    )
-                  ).toList(),
+                  children: state.notes
+                      .map((note) => InkWell(
+                            onTap: () {
+                              if (state.selectedNotes.isEmpty) {
+                                Navigator.pushNamed(context, "/add_note",arguments: note);
+                              } else {
+                                final isSelected =state.selectedNotes.contains(note);
+                                if (isSelected) {
+                                  context.read<NotesBloc>().add(DeselectNoteEvent(note));
+                                } else {
+                                  context.read<NotesBloc>().add(SelectNoteEvent(note));
+                                }
+                              }
+                            },
+                            onLongPress: () {
+                              final isSelected =
+                                  state.selectedNotes.contains(note);
+                              if (isSelected) {
+                                context.read<NotesBloc>().add(DeselectNoteEvent(note));
+                              } else {
+                                context.read<NotesBloc>().add(SelectNoteEvent(note));
+                              }
+                            },
+                            child:NoteWidget(note: note),
+                            
+                          )).toList(),
                 );
               },
             ),

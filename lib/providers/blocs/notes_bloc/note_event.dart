@@ -27,3 +27,24 @@ class UpdateNoteEvent extends NoteEvent {
   @override
   List<Object> get props => [note];
 }
+
+class SelectNoteEvent extends NoteEvent {
+  final Note note;
+
+  const SelectNoteEvent(this.note);
+
+  @override
+  List<Object> get props => [note];
+}
+
+class DeselectNoteEvent extends NoteEvent {
+  final Note note;
+
+  const DeselectNoteEvent(this.note);
+
+  @override
+  List<Object> get props => [note];
+}
+
+class DeselectAllNotesEvent extends NoteEvent {}
+
