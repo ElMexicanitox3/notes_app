@@ -140,7 +140,10 @@ class Homescreen extends StatelessWidget {
                                 context.read<NotesBloc>().add(SelectNoteEvent(note));
                               }
                             },
-                            child:NoteWidget(note: note),
+                            child:NoteWidget(
+                              note: note,
+                              isSelected: state.selectedNotes.contains(note)? true : false,
+                            ),
                             
                           )).toList(),
                 );
