@@ -46,5 +46,14 @@ class DeselectNoteEvent extends NoteEvent {
   List<Object> get props => [note];
 }
 
+class DeleteNotesEvent extends NoteEvent {
+  final List<Note> notes;
+
+  const DeleteNotesEvent(this.notes);
+
+  @override
+  List<Object> get props => [notes];
+}
+
 class DeselectAllNotesEvent extends NoteEvent {}
 

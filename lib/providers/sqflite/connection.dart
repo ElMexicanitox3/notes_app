@@ -84,4 +84,14 @@ class DBProvider {
     final db = await instance.database;
     db.close();
   }
+
+  // Delete a note
+  Future<int> deleteNote(int id) async {
+    final db = await instance.database;
+    return await db.delete(
+      'notes',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }

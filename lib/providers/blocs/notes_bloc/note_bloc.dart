@@ -12,6 +12,7 @@ class NotesBloc extends Bloc<NoteEvent, NoteState>{
     on<UpdateNoteEvent>(_onUpdateNote);
     on<SelectNoteEvent>(_onSelectNote);
     on<DeselectNoteEvent>(_onDeselectNote);
+    on<DeleteNotesEvent>(_onDeleteNotes);
     on<DeselectAllNotesEvent>(_onDeselectAllNotes);
   }
 
@@ -54,7 +55,15 @@ class NotesBloc extends Bloc<NoteEvent, NoteState>{
     emit(NoteState(state.notes, updatedSelectedNotes));
   }
 
+  void _onDeleteNotes(DeleteNotesEvent event, Emitter<NoteState> emit) async {
+    event.notes.forEach((note) async {
+      await DBProvider.instance.deleteNote(note.id!);
+    });
+    List<Note> updatedNotes = await DBProvider.instance.getNotes();
+    emit(NoteState(updatedNotes));
+  }
+
   void _onDeselectAllNotes(DeselectAllNotesEvent event, Emitter<NoteState> emit) {
-    emit(NoteState(state.notes, []));
+    emit(NoteState(state.notes, const []));
   }
 }

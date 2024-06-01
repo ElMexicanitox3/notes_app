@@ -27,7 +27,12 @@ class Homescreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(40),
             ),
             onPressed: () {
-              Navigator.pushNamed(context, "/add_note");
+              if (state.selectedNotes.isNotEmpty) {
+                context.read<NotesBloc>().add(DeleteNotesEvent(state.selectedNotes));
+                context.read<NotesBloc>().add(DeselectAllNotesEvent());
+              }else{
+                Navigator.pushNamed(context, "/add_note");
+              }
             },
             backgroundColor: state.selectedNotes.isEmpty? AppThemes.primary : AppThemes.delete,
             child: state.selectedNotes.isEmpty? const Icon(Icons.add) : const Icon(Icons.delete),
@@ -63,7 +68,7 @@ class Homescreen extends StatelessWidget {
               ),
               Text(
                 "${state.selectedNotes.length} Selected",
-                style: TextStyle(fontSize: 20, color: AppThemes.primary),
+                style: const TextStyle(fontSize: 20, color: AppThemes.primary),
               )
             ],
           );
@@ -72,7 +77,6 @@ class Homescreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         toolbarHeight: 120,
-        backgroundColor: AppThemes.w,
         title: Column(
           children: [
             Row(
@@ -112,38 +116,58 @@ class Homescreen extends StatelessWidget {
             BlocBuilder<NotesBloc, NoteState>(
               builder: (context, state) {
                 if (state.notes.isEmpty) {
-                  return const Text("No notes found.");
+                  return const Center(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 100),
+                        Text(
+                          "No notes yet",
+                          style: TextStyle(
+                            color: AppThemes.primary,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Text(
+                          "Press the + button to add a new note",
+                          style: TextStyle(
+                            color: AppThemes.primary,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
                 }
                 return Column(
-                  children: state.notes
-                      .map((note) => InkWell(
-                            onTap: () {
-                              if (state.selectedNotes.isEmpty) {
-                                Navigator.pushNamed(context, "/add_note",arguments: note);
-                              } else {
-                                final isSelected =state.selectedNotes.contains(note);
-                                if (isSelected) {
-                                  context.read<NotesBloc>().add(DeselectNoteEvent(note));
-                                } else {
-                                  context.read<NotesBloc>().add(SelectNoteEvent(note));
-                                }
-                              }
-                            },
-                            onLongPress: () {
-                              final isSelected =
-                                  state.selectedNotes.contains(note);
-                              if (isSelected) {
-                                context.read<NotesBloc>().add(DeselectNoteEvent(note));
-                              } else {
-                                context.read<NotesBloc>().add(SelectNoteEvent(note));
-                              }
-                            },
-                            child:NoteWidget(
-                              note: note,
-                              isSelected: state.selectedNotes.contains(note)? true : false,
-                            ),
-                            
-                          )).toList(),
+                  children: state.notes.map((note) => InkWell(
+                    onTap: () {
+                      if (state.selectedNotes.isEmpty) {
+                        Navigator.pushNamed(context, "/add_note",arguments: note);
+                      } else {
+                        final isSelected =state.selectedNotes.contains(note);
+                        if (isSelected) {
+                          context.read<NotesBloc>().add(DeselectNoteEvent(note));
+                        } else {
+                          context.read<NotesBloc>().add(SelectNoteEvent(note));
+                        }
+                      }
+                    },
+                    onLongPress: () {
+                      final isSelected = state.selectedNotes.contains(note);
+                      if (isSelected) {
+                        context.read<NotesBloc>().add(DeselectNoteEvent(note));
+                      } else {
+                        context.read<NotesBloc>().add(SelectNoteEvent(note));
+                      }
+                    },
+                    child:NoteWidget(
+                      note: note,
+                      isSelected: state.selectedNotes.contains(note)? true : false,
+                    ),
+                    
+                  )).toList(),
                 );
               },
             ),
