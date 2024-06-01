@@ -49,13 +49,10 @@ class Homescreen extends StatelessWidget {
           if (state.selectedNotes.isEmpty) {
             return Row(children: [
               IconButton(
-                icon: const Icon(Icons.settings),
-                onPressed: () {}, // Navigation code here
-                color: AppThemes.primary,
-              ),
-              IconButton(
-                icon: const Icon(Icons.camera_alt),
-                onPressed: () {}, // Navigation code here
+                icon: const Icon(Icons.info),
+                onPressed: () {
+                  Navigator.pushNamed(context, "/about");
+                }, // Navigation code here
                 color: AppThemes.primary,
               ),
             ]);

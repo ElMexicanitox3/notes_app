@@ -16,7 +16,7 @@ class SearchBarCustom extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          color: AppThemes.secondary,
+          color: const Color.fromARGB(255, 40, 40, 40),
           child: Row(
             children: [
 

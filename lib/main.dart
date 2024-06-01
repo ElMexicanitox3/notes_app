@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/screens/about/about.dart';
 import 'package:notes_app/screens/screens.dart';
 import 'providers/blocs/theme_bloc/theme_bloc.dart';
 import 'providers/blocs/theme_bloc/theme_state.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
             theme: state.themeData,
             routes: {
               "/home": (context) => Homescreen(),
+              "/about": (context) => AboutScreen(),
             },
             onGenerateRoute: (settings) {
               if (settings.name == '/add_note') {
