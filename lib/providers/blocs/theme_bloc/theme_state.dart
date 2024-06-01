@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 abstract class ThemeState extends Equatable {
   final ThemeData themeData;
+  final bool isDark;
 
-  const ThemeState(this.themeData);
+  const ThemeState(this.themeData, this.isDark);
 
   @override
   List<Object> get props => [themeData];
@@ -13,11 +14,11 @@ abstract class ThemeState extends Equatable {
 
 class LightThemeState extends ThemeState {
   // LightThemeState() : super(AppThemes.lightTheme);
-  LightThemeState() : super(ThemeData.light());
+  LightThemeState() : super(ThemeData.light(), false);
 
 }
 
 class DarkThemeState extends ThemeState {
   // DarkThemeState() : super(AppThemes.darkTheme);
-  DarkThemeState() : super(ThemeData.dark());
+  DarkThemeState() : super(ThemeData.dark(), true);
 }

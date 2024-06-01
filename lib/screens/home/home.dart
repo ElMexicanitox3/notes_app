@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/providers/blocs/notes_bloc/note_bloc.dart';
 import 'package:notes_app/providers/blocs/notes_bloc/note_event.dart';
 import 'package:notes_app/providers/blocs/notes_bloc/note_state.dart';
+import 'package:notes_app/providers/blocs/theme_bloc/theme_bloc.dart';
+import 'package:notes_app/providers/blocs/theme_bloc/theme_event.dart';
+import 'package:notes_app/providers/blocs/theme_bloc/theme_state.dart';
 import 'package:notes_app/screens/home/components/search_bar.dart';
 import 'package:notes_app/themes/app_themes.dart';
 import '../../widgets/widgets.dart';
@@ -14,7 +17,7 @@ class Homescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Disparar la carga de notas al abrir la pantalla
+    // Disparar la carga de notas al abrir la pantalla 
     context.read<NotesBloc>().add(GetNotesEvent());
 
     return Scaffold(
@@ -90,19 +93,21 @@ class Homescreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                // Switch for theme change, implement functionality based on ThemeBloc
-                Switch(
-                  activeThumbImage: const AssetImage("lib/assets/img/moon.png"),
-                  inactiveThumbImage:
-                      const AssetImage("lib/assets/img/sun.png"),
-                  inactiveThumbColor: AppThemes.secondary,
-                  value: false,
-                  onChanged: (value) {
-                    // BlocProvider.of<ThemeBloc>(context).add(
-                    //   value ? DarkThemeEvent() : LightThemeEvent()
-                    // );
-                  },
-                ),
+
+                BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+                  return Switch(
+                    activeThumbImage: const AssetImage("lib/assets/img/moon.png"),
+                    activeColor: AppThemes.secondary,
+                    activeTrackColor: AppThemes.secondary,
+                    inactiveThumbImage: const AssetImage("lib/assets/img/sun.png"),
+                    inactiveThumbColor: AppThemes.secondary,
+                    value: state.isDark,
+                    onChanged: (value) {
+                      context.read<ThemeBloc>().add(ToggleThemeEvent());
+                    },
+                  );
+                }),
+
               ],
             ),
             const SearchBarCustom(),
