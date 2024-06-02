@@ -55,5 +55,14 @@ class DeleteNotesEvent extends NoteEvent {
   List<Object> get props => [notes];
 }
 
+class SearchNotesEvent extends NoteEvent {
+  final String query;
+
+  const SearchNotesEvent(this.query);
+
+  @override
+  List<Object> get props => [query];
+}
+
 class DeselectAllNotesEvent extends NoteEvent {}
 

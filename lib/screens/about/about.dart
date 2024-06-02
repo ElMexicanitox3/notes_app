@@ -15,7 +15,7 @@ class AboutScreen  extends StatelessWidget {
         children: [
           Container(
             height: 320,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppThemes.primary,
             ),
           ),
@@ -24,19 +24,14 @@ class AboutScreen  extends StatelessWidget {
           Center(
             child: Container(
               margin: const EdgeInsets.only(top: 20),
-              child: Column(
+              child: const Column(
                 children: [
-                  // Image.asset(
-                  //   'lib/assets/img/me.jpg',
-                  //   width: 150,
-                  //   height: 150,
-                  // ),
-                  const CircleAvatar(
+                  CircleAvatar(
                     backgroundImage: AssetImage('lib/assets/img/me.jpg'),
                     radius: 100,
                   ),
-                  const SizedBox(height: 10),
-                  const Text(
+                  SizedBox(height: 10),
+                  Text(
                     "Gerardo Matadama Peralta",
                     style: TextStyle(
                       color: Colors.white,
@@ -44,7 +39,7 @@ class AboutScreen  extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
+                  Text(
                     "Developer Full Stack | Flutter ",
                     style: TextStyle(
                       color: Colors.white,
@@ -54,19 +49,19 @@ class AboutScreen  extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.location_pin),
-                      const Text("Mexico City, Mexico", style: TextStyle(color: Colors.white, fontSize: 15)),
+                      Icon(Icons.location_pin),
+                      Text("Mexico City, Mexico", style: TextStyle(color: Colors.white, fontSize: 15)),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       
                       children: [
-                        const Text("Notes App", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        const Text("Version 1.0.0", style: TextStyle( fontSize: 15)),
+                        Text("Notes App", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                        Text("Version 1.0.0", style: TextStyle( fontSize: 15)),
                       ],
                     ),
                   )

@@ -94,4 +94,15 @@ class DBProvider {
       whereArgs: [id],
     );
   }
+
+  // search notes where title or content contains the query
+  Future<List<Note>> searchNotes(String query) async {
+    final db = await instance.database;
+    final result = await db.rawQuery('''
+      SELECT * FROM notes
+      WHERE title LIKE '%$query%' OR content LIKE '%$query%'
+    ''');
+    return result.map((json) => Note.fromJson(json)).toList();
+  }
+  
 }

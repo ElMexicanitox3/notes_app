@@ -8,7 +8,7 @@ import 'package:notes_app/providers/blocs/notes_bloc/note_event.dart';
 class AddNote extends StatefulWidget {
   final Note? updateNote;
 
-  AddNote({super.key, this.updateNote});
+  const AddNote({super.key, this.updateNote});
 
   @override
   _AddNoteState createState() => _AddNoteState();
