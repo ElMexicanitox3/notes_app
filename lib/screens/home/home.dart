@@ -38,7 +38,7 @@ class Homescreen extends StatelessWidget {
               }
             },
             backgroundColor: state.selectedNotes.isEmpty? AppThemes.primary : AppThemes.delete,
-            child: state.selectedNotes.isEmpty? const Icon(Icons.add) : const Icon(Icons.delete),
+            child: state.selectedNotes.isEmpty? const Icon(Icons.add, color: AppThemes.secondary,) : const Icon(Icons.delete),
           );
         },
       ),

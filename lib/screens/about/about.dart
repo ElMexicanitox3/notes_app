@@ -34,7 +34,7 @@ class AboutScreen  extends StatelessWidget {
                   Text(
                     "Gerardo Matadama Peralta",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppThemes.w,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
@@ -42,15 +42,15 @@ class AboutScreen  extends StatelessWidget {
                   Text(
                     "Developer Full Stack | Flutter ",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppThemes.w,
                       fontSize: 15,
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.location_pin),
-                      Text("Mexico City, Mexico", style: TextStyle(color: Colors.white, fontSize: 15)),
+                      Icon(Icons.location_pin, color:AppThemes.w),
+                      Text("Mexico City, Mexico", style: TextStyle(color: AppThemes.w, fontSize: 15)),
                     ],
                   ),
                   SizedBox(height: 10),

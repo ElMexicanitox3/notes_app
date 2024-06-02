@@ -44,12 +44,12 @@ class SearchBarCustom extends StatelessWidget {
                       ),
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.filter_list),
-                    color: AppThemes.w,
-                    iconSize: 30,
-                    onPressed: () {},
-                  ),
+                  // IconButton(
+                  //   icon: const Icon(Icons.filter_list),
+                  //   color: AppThemes.w,
+                  //   iconSize: 30,
+                  //   onPressed: () {},
+                  // ),
                   const SizedBox(width: 10),
                 ],
               ),
