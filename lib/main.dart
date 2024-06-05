@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
           create: (context) => ThemeBloc(),
         ),
         BlocProvider<NotesBloc>(
-          create: (context) => NotesBloc(),
+          create: (context){ 
+            return NotesBloc();
+          },
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
                     return AddNote(
                       updateNote: note,
                     );
-                  },
+                  }
                 );
               }
               return null;
