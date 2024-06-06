@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/themes/app_themes.dart';
+import 'package:NoteHub/themes/app_themes.dart';
 
 class AboutScreen  extends StatelessWidget {
   const AboutScreen ({super.key});

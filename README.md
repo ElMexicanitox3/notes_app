@@ -1,4 +1,4 @@
-# notes_app
+# NoteHub
 
 A new Flutter project.
 

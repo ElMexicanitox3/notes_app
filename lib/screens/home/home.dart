@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/providers/blocs/notes_bloc/note_bloc.dart';
-import 'package:notes_app/providers/blocs/notes_bloc/note_event.dart';
-import 'package:notes_app/providers/blocs/notes_bloc/note_state.dart';
-import 'package:notes_app/providers/blocs/theme_bloc/theme_bloc.dart';
-import 'package:notes_app/providers/blocs/theme_bloc/theme_event.dart';
-import 'package:notes_app/providers/blocs/theme_bloc/theme_state.dart';
-import 'package:notes_app/screens/home/components/search_bar.dart';
-import 'package:notes_app/themes/app_themes.dart';
+import 'package:NoteHub/providers/blocs/notes_bloc/note_bloc.dart';
+import 'package:NoteHub/providers/blocs/notes_bloc/note_event.dart';
+import 'package:NoteHub/providers/blocs/notes_bloc/note_state.dart';
+import 'package:NoteHub/providers/blocs/theme_bloc/theme_bloc.dart';
+import 'package:NoteHub/providers/blocs/theme_bloc/theme_event.dart';
+import 'package:NoteHub/providers/blocs/theme_bloc/theme_state.dart';
+import 'package:NoteHub/screens/home/components/search_bar.dart';
+import 'package:NoteHub/themes/app_themes.dart';
 import '../../widgets/widgets.dart';
 
 class Homescreen extends StatelessWidget {

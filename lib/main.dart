@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/screens/about/about.dart';
-import 'package:notes_app/screens/screens.dart';
+import 'package:NoteHub/screens/about/about.dart';
+import 'package:NoteHub/screens/screens.dart';
 import 'providers/blocs/theme_bloc/theme_bloc.dart';
 import 'providers/blocs/theme_bloc/theme_state.dart';
 import 'providers/blocs/notes_bloc/note_bloc.dart'; // Asegúrate de importar correctamente tu NotesBloc
-import 'package:notes_app/models/note_model.dart';
+import 'package:NoteHub/models/note_model.dart';
 
 
 void main() {

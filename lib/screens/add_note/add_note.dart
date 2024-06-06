@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app/constants/words.dart';
-import 'package:notes_app/models/note_model.dart';
-import 'package:notes_app/providers/blocs/notes_bloc/note_bloc.dart';
-import 'package:notes_app/providers/blocs/notes_bloc/note_event.dart';
+import 'package:NoteHub/constants/words.dart';
+import 'package:NoteHub/models/note_model.dart';
+import 'package:NoteHub/providers/blocs/notes_bloc/note_bloc.dart';
+import 'package:NoteHub/providers/blocs/notes_bloc/note_event.dart';
 
 class AddNote extends StatefulWidget {
   final Note? updateNote;
