@@ -1,4 +1,4 @@
-package com.example.NoteHub
+package com.gerardomp.NoteHub
 
 import io.flutter.embedding.android.FlutterActivity
 
