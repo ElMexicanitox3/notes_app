@@ -1,4 +1,4 @@
-import 'package:NoteHub/screens/home/components/search_bar.dart';
+import 'package:NoteHub/screens/home/components/searchBar.dart';
 import 'package:NoteHub/themes/app_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
