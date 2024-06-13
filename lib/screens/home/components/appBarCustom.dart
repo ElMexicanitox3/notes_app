@@ -22,7 +22,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "Notes App",
+                "NoteHub",
                 style: TextStyle(
                   color: AppThemes.primary,
                   fontSize: 30,
