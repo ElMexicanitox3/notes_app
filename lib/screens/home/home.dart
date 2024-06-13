@@ -1,14 +1,8 @@
+import 'package:NoteHub/providers/blocs/blocs.dart';
+import 'package:NoteHub/screens/home/components/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:NoteHub/providers/blocs/notes_bloc/note_bloc.dart';
-import 'package:NoteHub/providers/blocs/notes_bloc/note_event.dart';
-import 'package:NoteHub/providers/blocs/notes_bloc/note_state.dart';
-import 'package:NoteHub/providers/blocs/theme_bloc/theme_bloc.dart';
-import 'package:NoteHub/providers/blocs/theme_bloc/theme_event.dart';
-import 'package:NoteHub/providers/blocs/theme_bloc/theme_state.dart';
-import 'package:NoteHub/screens/home/components/search_bar.dart';
 import 'package:NoteHub/themes/app_themes.dart';
-import '../../widgets/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Homescreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -18,7 +12,6 @@ class Homescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Disparar la carga de notas al abrir la pantalla 
-    context.read<NotesBloc>().add(GetNotesEvent());
 
     return Scaffold(
       key: _scaffoldKey,
@@ -111,71 +104,7 @@ class Homescreen extends StatelessWidget {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            BlocBuilder<NotesBloc, NoteState>(
-              builder: (context, state) {
-                if (state.notes.isEmpty) {
-                  return const Center(
-                    child: Column(
-                      children: [
-                        SizedBox(height: 100),
-                        Text(
-                          "No notes yet",
-                          style: TextStyle(
-                            color: AppThemes.primary,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Text(
-                          "Press the + button to add a new note",
-                          style: TextStyle(
-                            color: AppThemes.primary,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                return Column(
-                  children: state.notes.map((note) => InkWell(
-                    onTap: () {
-                      if (state.selectedNotes.isEmpty) {
-                        Navigator.pushNamed(context, "/add_note",arguments: note);
-                      } else {
-                        final isSelected =state.selectedNotes.contains(note);
-                        if (isSelected) {
-                          context.read<NotesBloc>().add(DeselectNoteEvent(note));
-                        } else {
-                          context.read<NotesBloc>().add(SelectNoteEvent(note));
-                        }
-                      }
-                    },
-                    onLongPress: () {
-                      final isSelected = state.selectedNotes.contains(note);
-                      if (isSelected) {
-                        context.read<NotesBloc>().add(DeselectNoteEvent(note));
-                      } else {
-                        context.read<NotesBloc>().add(SelectNoteEvent(note));
-                      }
-                    },
-                    child:NoteWidget(
-                      note: note,
-                      isSelected: state.selectedNotes.contains(note)? true : false,
-                    ),
-                    
-                  )).toList(),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      body: const Body(),
     );
   }
 }
