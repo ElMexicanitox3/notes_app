@@ -1,4 +1,3 @@
-// theme_state.dart
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -13,12 +12,9 @@ abstract class ThemeState extends Equatable {
 }
 
 class LightThemeState extends ThemeState {
-  // LightThemeState() : super(AppThemes.lightTheme);
   LightThemeState() : super(ThemeData.light(), false);
-
 }
 
 class DarkThemeState extends ThemeState {
-  // DarkThemeState() : super(AppThemes.darkTheme);
   DarkThemeState() : super(ThemeData.dark(), true);
 }
