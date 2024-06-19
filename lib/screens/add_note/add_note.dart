@@ -1,3 +1,4 @@
+import 'package:NoteHub/app_localizations.dart';
 import 'package:NoteHub/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,7 +64,7 @@ class _AddNoteState extends State<AddNote> {
           title: Column(
             children: [
               Text(
-                widget.updateNote == null ? "Add Note" : "Update Note",
+                widget.updateNote == null ? AppLocalizations.of(context).translate('add_note') : "Update Note",
               ),
               if (widget.updateNote != null)...[
                 Text(
