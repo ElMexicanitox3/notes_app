@@ -1,3 +1,4 @@
+import 'package:NoteHub/helpers/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:NoteHub/constants/words.dart';
@@ -59,7 +60,22 @@ class _AddNoteState extends State<AddNote> {
       onPopInvoked: (didPop) => _save(context),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Add Note"),
+          title: Column(
+            children: [
+              Text(
+                widget.updateNote == null ? "Add Note" : "Update Note",
+              ),
+              if (widget.updateNote != null)...[
+                Text(
+                  DateFormatter.formatDate(DateTime.parse(widget.updateNote!.updatedAt ?? "")),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                  ),                 
+                ),
+              ]
+            ],
+          )
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
