@@ -8,5 +8,6 @@
     "today": "Hoy",
     "yesterday": "Ayer",
     "no_notes": "No hay notas",
-    "no_notes_desc" : "Oprime el boton + para agregar nota"
+    "no_notes_desc" : "Oprime el boton + para agregar nota",
+    "selected_note": "Seleccionado"
 }

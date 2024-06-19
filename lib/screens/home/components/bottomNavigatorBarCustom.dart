@@ -1,3 +1,4 @@
+import 'package:NoteHub/app_localizations.dart';
 import 'package:NoteHub/providers/blocs/notes_bloc/note.dart';
 import 'package:NoteHub/themes/app_themes.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class BottomNavigatorBarCustom extends StatelessWidget {
               color: AppThemes.primary,
             ),
             Text(
-              "${state.selectedNotes.length} Selected",
+              "${state.selectedNotes.length} ${AppLocalizations.of(context).translate('selected_note')}",
               style: const TextStyle(fontSize: 20, color: AppThemes.primary),
             )
           ],
