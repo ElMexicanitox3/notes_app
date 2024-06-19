@@ -1,4 +1,8 @@
 {
     "title": "NoteHub",
-    "add_note": "Add Note"
+    "add_note": "Add Note",
+    "update_note": "Update Note",
+    "title_note": "Title",
+    "content_note": "Content",
+    "search_note": "Search"
 }

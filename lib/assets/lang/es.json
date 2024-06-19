@@ -1,4 +1,8 @@
 {
     "title": "NoteHub",
-    "add_note": "Nueva nota"
+    "add_note": "Nueva Nota",
+    "update_note": "Actualizar Nota",
+    "title_note": "Título",
+    "content_note": "Contenido",
+    "search_note": "Buscar"
 }

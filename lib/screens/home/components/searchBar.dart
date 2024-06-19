@@ -4,6 +4,8 @@ import 'package:NoteHub/providers/blocs/notes_bloc/note_bloc.dart';
 import 'package:NoteHub/providers/blocs/notes_bloc/note_event.dart';
 import 'package:NoteHub/providers/blocs/notes_bloc/note_state.dart';
 import 'package:NoteHub/themes/app_themes.dart';
+import 'package:NoteHub/app_localizations.dart';
+
 
 class SearchBarCustom extends StatelessWidget {
   const SearchBarCustom({
@@ -38,7 +40,8 @@ class SearchBarCustom extends StatelessWidget {
                         context.read<NotesBloc>().add(SearchNotesEvent(value));
                       },
                       style: const TextStyle(color: AppThemes.primary),
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context).translate('search_note'),
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                       ),
