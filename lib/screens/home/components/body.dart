@@ -1,3 +1,4 @@
+import 'package:NoteHub/app_localizations.dart';
 import 'package:NoteHub/providers/blocs/notes_bloc/note.dart';
 import 'package:NoteHub/themes/app_themes.dart';
 import 'package:NoteHub/widgets/widgets.dart';
@@ -20,12 +21,12 @@ class Body extends StatelessWidget {
           BlocBuilder<NotesBloc, NoteState>(
             builder: (context, state) {
               if (state.notes.isEmpty) {
-                return const Center(
+                return Center(
                   child: Column(
                     children: [
                       SizedBox(height: 100),
                       Text(
-                        "No notes yet",
+                        AppLocalizations.of(context).translate('no_notes'),
                         style: TextStyle(
                           color: AppThemes.primary,
                           fontSize: 30,
@@ -34,7 +35,7 @@ class Body extends StatelessWidget {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        "Press the + button to add a new note",
+                        AppLocalizations.of(context).translate('no_notes_desc'),
                         style: TextStyle(
                           color: AppThemes.primary,
                           fontSize: 20,

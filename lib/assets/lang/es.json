@@ -4,5 +4,9 @@
     "update_note": "Actualizar Nota",
     "title_note": "Título",
     "content_note": "Contenido",
-    "search_note": "Buscar"
+    "search_note": "Buscar",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "no_notes": "No hay notas",
+    "no_notes_desc" : "Oprime el boton + para agregar nota"
 }

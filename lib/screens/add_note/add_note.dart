@@ -67,7 +67,7 @@ class _AddNoteState extends State<AddNote> {
               ),
               if (widget.updateNote != null)...[
                 Text(
-                  DateFormatter.formatDate(DateTime.parse(widget.updateNote!.updatedAt ?? "")),
+                  DateFormatter(context: context).formatDate(DateTime.parse(widget.updateNote!.updatedAt ?? "")),
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.white,
