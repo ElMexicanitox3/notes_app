@@ -37,23 +37,27 @@ class ConfigScreen extends StatelessWidget {
                       title: AppLocalizations.of(context).translate('language'),
                       subtitle: 'English',
                       leading: Icons.language,
-                      trailing: Text('English'),
+                      trailing: Text(
+                        context.read<LanguageBloc>().state is LanguageChanged
+                            ? ((context.read<LanguageBloc>().state as LanguageChanged).languageCode == 'en'
+                                ? 'English'
+                                : 'Español')
+                            : 'English',
+                      ),
+
                       onTap: () {
                         showDialog(
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: Text('Select Language'),
+                              title: Text(AppLocalizations.of(context).translate('select_language')),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   ListTile(
                                     title: Text('English'),
                                     onTap: () {
-                                      // context.read<LanguageBloc>().add(ChangeLanguageEvent(Locale('en')));
-                                                                      context.read<LanguageBloc>().add(ChangeLanguageEvent('en'));
                                       context.read<LanguageBloc>().add(ChangeLanguageEvent('en'));
-
                                       Navigator.of(context).pop();
                                     },
                                   ),
