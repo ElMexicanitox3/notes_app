@@ -61,6 +61,8 @@ class _AddNoteState extends State<AddNote> {
       child: Scaffold(
         appBar: AppBar(
           title: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 widget.updateNote == null ? AppLocalizations.of(context).translate('add_note') : AppLocalizations.of(context).translate('update_note'),
@@ -70,7 +72,6 @@ class _AddNoteState extends State<AddNote> {
                   DateFormatter(context: context).formatDate(DateTime.parse(widget.updateNote!.updatedAt ?? "")),
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.white,
                   ),                 
                 ),
               ]
