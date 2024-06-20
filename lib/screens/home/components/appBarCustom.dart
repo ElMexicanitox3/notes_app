@@ -1,9 +1,7 @@
 import 'package:NoteHub/screens/home/components/searchBar.dart';
 import 'package:NoteHub/themes/app_themes.dart';
+import 'package:NoteHub/widgets/switch_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../providers/blocs/theme_bloc/theme.dart';
 
 class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   const AppBarCustom({
@@ -30,19 +28,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
     
-              BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
-                return Switch(
-                  activeThumbImage: const AssetImage("lib/assets/img/moon.png"),
-                  activeColor: AppThemes.secondary,
-                  activeTrackColor: AppThemes.secondary,
-                  inactiveThumbImage: const AssetImage("lib/assets/img/sun.png"),
-                  inactiveThumbColor: AppThemes.secondary,
-                  value: state.isDark,
-                  onChanged: (value) {
-                    context.read<ThemeBloc>().add(ToggleThemeEvent());
-                  },
-                );
-              }),
+              SwitchThemeCustom(),
     
             ],
           ),

@@ -16,9 +16,9 @@ class BottomNavigatorBarCustom extends StatelessWidget {
         if (state.selectedNotes.isEmpty) {
           return Row(children: [
             IconButton(
-              icon: const Icon(Icons.info),
+              icon: const Icon(Icons.settings),
               onPressed: () {
-                Navigator.pushNamed(context, "/about");
+                Navigator.pushNamed(context, "/config");
               }, // Navigation code here
               color: AppThemes.primary,
             ),

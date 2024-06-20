@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
                 routes: {
                   "/home": (context) => Homescreen(),
                   "/about": (context) => AboutScreen(),
+                  "/config": (context) => ConfigScreen(),
                 },
                 onGenerateRoute: (settings) {
                   if (settings.name == '/add_note') {

@@ -39,9 +39,10 @@ class SearchBarCustom extends StatelessWidget {
                       onChanged: (value) {
                         context.read<NotesBloc>().add(SearchNotesEvent(value));
                       },
-                      style: const TextStyle(color: AppThemes.primary),
+                      style:  TextStyle(color: AppThemes.primary),
                       decoration: InputDecoration(
                         hintText: AppLocalizations.of(context).translate('search_note'),
+                        hintStyle:  TextStyle(color: AppThemes.w.withOpacity(0.5)),
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                       ),
