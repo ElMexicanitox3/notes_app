@@ -1,13 +1,18 @@
 {
-    "title": "NoteHub",
+    "about": "Acerca de NoteHub",
     "add_note": "Nueva Nota",
-    "update_note": "Actualizar Nota",
-    "title_note": "Título",
+    "config": "Configuración",
     "content_note": "Contenido",
-    "search_note": "Buscar",
-    "today": "Hoy",
-    "yesterday": "Ayer",
-    "no_notes": "No hay notas",
+    "language": "Idioma",
     "no_notes_desc" : "Oprime el boton + para agregar nota",
-    "selected_note": "Seleccionado"
+    "no_notes": "No hay notas",
+    "others": "Otros",
+    "search_note": "Buscar",
+    "selected_note": "Seleccionado",
+    "theme": "Tema",
+    "title_note": "Título",
+    "title": "NoteHub",
+    "today": "Hoy",
+    "update_note": "Actualizar Nota",
+    "yesterday": "Ayer"
 }

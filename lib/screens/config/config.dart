@@ -1,3 +1,5 @@
+import 'package:NoteHub/app_localizations.dart';
+import 'package:NoteHub/providers/blocs/lang_bloc/language_bloc.dart';
 import 'package:NoteHub/widgets/switch_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +13,7 @@ class ConfigScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Config"),
+        title: Text(AppLocalizations.of(context).translate('config')),
       ),
       body: Column(
         children: [
@@ -23,7 +25,7 @@ class ConfigScreen extends StatelessWidget {
                   title: 'General',
                   children: [
                     SettingsTile(
-                      title: 'Theme',
+                      title: AppLocalizations.of(context).translate('theme'),
                       subtitle: 'Dark Mode',
                       leading: Icons.brightness_4,
                       trailing: SwitchThemeCustom(),
@@ -32,19 +34,51 @@ class ConfigScreen extends StatelessWidget {
                       },
                     ),
                     SettingsTile(
-                      title: 'Language',
+                      title: AppLocalizations.of(context).translate('language'),
                       subtitle: 'English',
                       leading: Icons.language,
                       trailing: Text('English'),
-                      onTap: () {},
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text('Select Language'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ListTile(
+                                    title: Text('English'),
+                                    onTap: () {
+                                      // context.read<LanguageBloc>().add(ChangeLanguageEvent(Locale('en')));
+                                                                      context.read<LanguageBloc>().add(ChangeLanguageEvent('en'));
+                                      context.read<LanguageBloc>().add(ChangeLanguageEvent('en'));
+
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  ListTile(
+                                    title: Text('Español'),
+                                    onTap: () {
+                                      // context.read<LanguageBloc>().add(ChangeLanguageEvent(Locale('es')));
+                                      context.read<LanguageBloc>().add(ChangeLanguageEvent('es'));
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),
                 SettingsGroup(
-                  title: 'Others',
+                  title: AppLocalizations.of(context).translate('others'),
                   children: [
                     SettingsTile(
-                      title: 'About NoteHub',
+                      title: AppLocalizations.of(context).translate('about'),
                       leading: Icons.info,
                       trailing: Icon(Icons.arrow_forward_ios),
                       onTap: () {
@@ -59,7 +93,7 @@ class ConfigScreen extends StatelessWidget {
           Padding(
             // padding: const EdgeInsets.all(16.0),
             padding: EdgeInsets.only(bottom: 32.0),
-            child: Text('Made with ❤️'),
+            child: Text('Made with ❤️🐤'),
           ),
         ],
       ),

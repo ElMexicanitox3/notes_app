@@ -1,13 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:NoteHub/providers/blocs/lang_bloc/language_bloc.dart';
 import 'package:NoteHub/providers/blocs/notes_bloc/note.dart';
 import 'package:NoteHub/providers/blocs/theme_bloc/theme.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:NoteHub/screens/about/about.dart';
 import 'package:NoteHub/screens/screens.dart';
 import 'package:NoteHub/models/note_model.dart';
 import 'app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,14 +33,16 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
-        builder: (context, state) {
+        builder: (context, themeState) {
           return BlocBuilder<LanguageBloc, LanguageState>(
-            builder: (context, langState) {
+            builder: (context, languageState) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                title: 'Flutter Demo',
-                theme: state.themeData,
-                locale: langState.locale,
+                title: 'NoteHub',
+                theme: themeState.themeData,
+                locale: languageState is LanguageChanged
+                    ? Locale(languageState.languageCode)
+                    : Locale('en'),
                 supportedLocales: [
                   Locale('en', 'US'),
                   Locale('es', 'ES'),
@@ -49,6 +51,7 @@ class MyApp extends StatelessWidget {
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate, // Añadir este delegado
                 ],
                 routes: {
                   "/home": (context) => Homescreen(),

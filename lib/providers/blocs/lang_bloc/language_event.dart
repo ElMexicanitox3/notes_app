@@ -8,10 +8,10 @@ abstract class LanguageEvent extends Equatable {
 }
 
 class ChangeLanguageEvent extends LanguageEvent {
-  final Locale locale;
+  final String languageCode;
 
-  const ChangeLanguageEvent(this.locale);
+  const ChangeLanguageEvent(this.languageCode);
 
   @override
-  List<Object> get props => [locale];
+  List<Object> get props => [languageCode];
 }
