@@ -15,6 +15,7 @@ class NotesBloc extends Bloc<NoteEvent, NoteState>{
     on<DeleteNotesEvent>(_onDeleteNotes);
     on<DeselectAllNotesEvent>(_onDeselectAllNotes);
     on<SearchNotesEvent>(_onSearchNotes);
+    on<LoadContentsEvent>(_onLoadContents);
   }
 
   Future<void> _onGetNotes(GetNotesEvent event, Emitter<NoteState> emit) async {
@@ -64,7 +65,6 @@ class NotesBloc extends Bloc<NoteEvent, NoteState>{
     emit(NoteState(updatedNotes));
   }
 
-
   void _onSearchNotes(SearchNotesEvent event, Emitter<NoteState> emit) async {
     List<Note> searchedNotes = await DBProvider.instance.searchNotes(event.query);
     emit(NoteState(searchedNotes));
@@ -73,4 +73,9 @@ class NotesBloc extends Bloc<NoteEvent, NoteState>{
   void _onDeselectAllNotes(DeselectAllNotesEvent event, Emitter<NoteState> emit) {
     emit(NoteState(state.notes, const []));
   }
+
+  void _onLoadContents(LoadContentsEvent event, Emitter<NoteState> emit) {
+    emit(NoteState(state.notes, state.selectedNotes, state.searchQuery, event.contents));
+  }
+
 }

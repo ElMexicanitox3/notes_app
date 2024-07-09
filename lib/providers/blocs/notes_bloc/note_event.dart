@@ -66,3 +66,12 @@ class SearchNotesEvent extends NoteEvent {
 
 class DeselectAllNotesEvent extends NoteEvent {}
 
+class LoadContentsEvent extends NoteEvent {
+  final List<NoteContent> contents;
+
+  const LoadContentsEvent(this.contents);
+
+  @override
+  List<Object> get props => [contents];
+}
+
