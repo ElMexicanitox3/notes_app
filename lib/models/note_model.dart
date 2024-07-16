@@ -16,6 +16,7 @@ class TextContent extends NoteContent {
   factory TextContent.fromJson(Map<String, dynamic> json) => TextContent(
     json['text'] as String,
   );
+  
 }
 
 class TaskContent extends NoteContent {

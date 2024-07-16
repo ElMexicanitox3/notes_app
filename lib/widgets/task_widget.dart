@@ -14,9 +14,6 @@ class TaskWidget extends StatefulWidget {
 class _TaskWidgetState extends State<TaskWidget> {
 
   final TextEditingController _controller = TextEditingController();
-  bool _isDone = false;
-  // Function when the checkbox change or push
-  
   
   @override
   void initState() {
