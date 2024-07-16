@@ -42,9 +42,8 @@ class _AddNoteState extends State<AddNote> {
   }
 
   void _save(BuildContext context) {
-    final contents = _contents.map((content) => content.toJson()).toList();
 
-    if (_titleController.text.isEmpty && contents.isEmpty) {
+    if (_titleController.text.isEmpty) {
       return;
     }
 
