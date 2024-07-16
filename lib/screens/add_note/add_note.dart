@@ -1,8 +1,10 @@
 import 'package:NoteHub/app_localizations.dart';
 import 'package:NoteHub/helpers/helpers.dart';
+import 'package:NoteHub/providers/blocs/blocs.dart';
 import 'package:NoteHub/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:NoteHub/models/note_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class AddNote extends StatefulWidget {
@@ -15,6 +17,7 @@ class AddNote extends StatefulWidget {
 }
 
 class _AddNoteState extends State<AddNote> {
+
   final TextEditingController _titleController = TextEditingController();
   final List<TextEditingController> _textControllers = [];
   final List<NoteContent> _contents = [];
@@ -24,8 +27,8 @@ class _AddNoteState extends State<AddNote> {
     super.initState();
 
     if (widget.updateNote != null) {
-      _titleController.text = widget.updateNote!.title ?? "";
-      for (var content in widget.updateNote!.contents) {
+      _titleController.text = widget.updateNote!.title;
+      for (var content in widget.updateNote!.content) {
         _contents.add(content);
         if (content is TextContent) {
           _textControllers.add(TextEditingController(text: content.text));
@@ -39,7 +42,26 @@ class _AddNoteState extends State<AddNote> {
   }
 
   void _save(BuildContext context) {
-    // Guardar la nota
+    final contents = _contents.map((content) => content.toJson()).toList();
+
+    if (_titleController.text.isEmpty && contents.isEmpty) {
+      return;
+    }
+
+    final Note note = Note(
+      id: widget.updateNote?.id,
+      title: _titleController.text,
+      content: _contents,
+      createdAt: widget.updateNote?.createdAt ?? DateTime.now().toString(),
+      updatedAt: DateTime.now().toString(),
+    );
+
+    if (widget.updateNote == null) {
+      context.read<NotesBloc>().add(AddNoteEvent(note));
+    } else {
+      context.read<NotesBloc>().add(UpdateNoteEvent(note));
+    }
+    
   }
 
   @override
@@ -60,7 +82,7 @@ class _AddNoteState extends State<AddNote> {
 
               if (widget.updateNote != null)
                 Text(
-                  DateFormatter(context: context).formatDate(DateTime.parse(widget.updateNote!.updatedAt ?? "")),
+                  DateFormatter(context: context).formatDate(DateTime.parse(widget.updateNote!.updatedAt)),
                   style: TextStyle(
                     fontSize: 12,
                   ),
@@ -92,8 +114,7 @@ class _AddNoteState extends State<AddNote> {
                       controller: _textControllers[index],
                       maxLines: null,
                       decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)
-                            .translate('content_note'),
+                        hintText: AppLocalizations.of(context).translate('content_note'),
                         border: InputBorder.none,
                       ),
                       keyboardType: TextInputType.multiline,
@@ -105,10 +126,19 @@ class _AddNoteState extends State<AddNote> {
                     return TaskWidget(
                       task: content.description,
                       isDone: content.isDone,
+                      onUpdate: (value) {
+                        setState(() {
+                          _contents[index] = TaskContent(description: value, isDone: content.isDone);
+                        });
+                      },
+                      onDelete: () {
+                        setState(() {
+                          _contents.removeAt(index);
+                        });
+                      },
                       onCheck: (isDone) {
                         setState(() {
-                          _contents[index] =
-                              TaskContent(description: content.description, isDone: isDone);
+                          _contents[index] = TaskContent(description: content.description, isDone: isDone);
                         });
                       },
                     );
@@ -126,6 +156,13 @@ class _AddNoteState extends State<AddNote> {
             IconButton(
               icon: Icon(Icons.text_fields),
               onPressed: () {
+
+                // si el ultimo contenido es un texto, no añadir otro
+                if (_contents.last is TextContent) {
+                  return;
+                }
+
+
                 setState(() {
                   _contents.add(TextContent(""));
                   _textControllers.add(TextEditingController());
@@ -137,6 +174,7 @@ class _AddNoteState extends State<AddNote> {
               onPressed: () {
                 setState(() {
                   _contents.add(TaskContent(description: "", isDone: false));
+                  _textControllers.add(TextEditingController());
                 });
               },
             ),

@@ -6,7 +6,8 @@ class TaskWidget extends StatefulWidget {
   final bool isDone;
   final Function(bool) onCheck;
   final Function() onDelete;
-  const TaskWidget({super.key, required this.task, required this.isDone, required this.onCheck, required this.onDelete});
+  final Function(String) onUpdate;
+  const TaskWidget({super.key, required this.task, required this.isDone, required this.onCheck, required this.onDelete, required this.onUpdate});
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -30,6 +31,7 @@ class _TaskWidgetState extends State<TaskWidget> {
         Expanded(
           child: TextField(
             controller: _controller,
+            onChanged: (value) => widget.onUpdate(value),
             decoration: const InputDecoration(
               hintText: "Task",
               border: InputBorder.none,

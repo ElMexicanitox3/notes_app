@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 abstract class NoteContent {
   Map<String, dynamic> toJson();
 }
@@ -16,7 +18,7 @@ class TextContent extends NoteContent {
   factory TextContent.fromJson(Map<String, dynamic> json) => TextContent(
     json['text'] as String,
   );
-  
+
 }
 
 class TaskContent extends NoteContent {
@@ -47,18 +49,18 @@ class TaskContent extends NoteContent {
 
 class Note {
   
-  final int id;
+  final int? id;
   final String title;
   final String createdAt;
   final String updatedAt;
-  final List<NoteContent> contents;
+  final List<NoteContent> content;
 
   Note({
-    required this.id,
+    this.id,
     required this.title,
     required this.createdAt,
     required this.updatedAt,
-    required this.contents,
+    required this.content,
   });
 
   Map<String, dynamic> toJson() => {
@@ -66,7 +68,7 @@ class Note {
     'title': title,
     'created_at': createdAt,
     'updated_at': updatedAt,
-    'contents': contents.map((content) => content.toJson()).toList(),
+    'content': jsonEncode(content.map((content) => content.toJson()).toList()),
   };
 
   factory Note.fromJson(Map<String, dynamic> json) => Note(
@@ -74,7 +76,8 @@ class Note {
     title: json['title'] as String,
     createdAt: json['created_at'],
     updatedAt: json['updated_at'],
-    contents: (json['contents'] as List).map((contentJson) {
+    // _TypeError (type 'String' is not a subtype of type 'List<dynamic>' in type cast)
+    content: (jsonDecode(json['content']) as List).map((contentJson) {
       if (contentJson['type'] == 'text') {
         return TextContent.fromJson(contentJson as Map<String, dynamic>);
       } else if (contentJson['type'] == 'task') {
@@ -90,14 +93,14 @@ class Note {
     String? title,
     String? createdAt,
     String? updatedAt,
-    List<NoteContent>? contents,
+    List<NoteContent>? content,
   }) {
     return Note(
       id: id ?? this.id,
       title: title ?? this.title,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
-      contents: contents ?? this.contents,
+      content: content ?? this.content,
     );
   }
 
@@ -107,7 +110,7 @@ class Note {
       title: 'Note 1',
       createdAt: DateTime.now().toString(),
       updatedAt: DateTime.now().toString(),
-      contents: [
+      content: [
         TextContent('This is some text.'),
         // TaskContent(id: 1, description: 'Task 1', isDone: false),
         TaskContent(description: 'Task 1', isDone: false),
@@ -121,7 +124,7 @@ class Note {
       title: 'Note 2',
       createdAt: DateTime.now().toString(),
       updatedAt: DateTime.now().toString(),
-      contents: [
+      content: [
         TextContent('Another text content.'),
         // TaskContent(id: 3, description: 'Another task', isDone: false),
         TaskContent(description: 'Another task', isDone: false),
