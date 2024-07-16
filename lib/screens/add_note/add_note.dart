@@ -38,25 +38,6 @@ class _AddNoteState extends State<AddNote> {
   void _save(BuildContext context) {
 
     final String title = _titleController.text.trim();
-    // final String content = _contentController.text.trim();
-
-    // if (title.isEmpty && content.isEmpty) {
-    //   return;
-    // }
-
-    // final Note note = Note(
-    //   id: widget.updateNote?.id,
-    //   title: title,
-    //   content: content,
-    //   createdAt: widget.updateNote?.createdAt ?? DateTime.now().toString(),
-    //   updatedAt: DateTime.now().toString(),
-    // );
-
-    // if (widget.updateNote == null) {
-    //   context.read<NotesBloc>().add(AddNoteEvent(note));
-    // } else {
-    //   context.read<NotesBloc>().add(UpdateNoteEvent(note));
-    // }
 
   }
 
@@ -95,7 +76,6 @@ class _AddNoteState extends State<AddNote> {
             child: Column(
               children: [
             
-            
                 TextField(
                   controller: _titleController,
                   maxLines: 1,
@@ -105,34 +85,6 @@ class _AddNoteState extends State<AddNote> {
                     border: InputBorder.none,
                   ),
                 ),
-
-                // BlocBuilder<NotesBloc, NoteState>(
-                //   builder: (context, state) {
-                //     print(state.contents);
-                //     return Column(
-                //       children: state.contents.map((e) {
-                //         if (e is TextContent) {
-                //           final index = state.contents.indexOf(e);
-                //           _textControllers.add(TextEditingController());
-                //           _textControllers[index].text = e.text;
-                //           return TextField(
-                //             controller: _textControllers[index],
-                //             maxLines: null,
-                //             decoration: InputDecoration(
-                //               hintText: AppLocalizations.of(context).translate('content_note'),
-                //               border: InputBorder.none,
-                //             ),
-                //             keyboardType: TextInputType.multiline,
-                //           );
-                //         } else if (e is TaskContent) {
-                //           return TaskWidget(task: e.description, isDone: e.isDone, onCheck: (x){}, );
-                //         } else {
-                //           return Text("Unknown content type");
-                //         }
-                //       }).toList(),
-                //     );
-                //   }
-                // ),
 
                 ..._contents.map((e) {
                   if (e is TextContent) {
@@ -155,19 +107,7 @@ class _AddNoteState extends State<AddNote> {
                     return Text("Unknown content type");
                   }
                 }).toList(),
-            
-                // TextField(
-                //   controller: _contentController,
-                //   maxLines: null,
-                //   decoration: InputDecoration(
-                //     hintText: AppLocalizations.of(context).translate('content_note'),
-                //     border: InputBorder.none,
-                //   ),
-                //   keyboardType: TextInputType.multiline,
-                // ),
 
-                
-            
             
               ],
             ),

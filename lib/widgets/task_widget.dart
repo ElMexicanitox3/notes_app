@@ -28,15 +28,7 @@ class _TaskWidgetState extends State<TaskWidget> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // Checkbox(value: widget.isDone, onChanged: (e){}),
-        InkWell(
-          onTap: (){
-            setState(() {
-              _isDone = !_isDone;
-              widget.onCheck(_isDone);
-            });
-          },
-        ),
+        Checkbox(value: widget.isDone, onChanged: (e){}),
         Expanded(
           child: TextField(
             controller: _controller,
