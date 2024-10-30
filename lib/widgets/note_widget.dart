@@ -27,7 +27,7 @@ class NoteWidget extends StatelessWidget {
               children: [
                 const SizedBox(height: 15.0),
                 Text(
-                  note.title ?? "",
+                  note.title ,
                   style: const TextStyle(
                     color: AppThemes.primary,
                     fontSize: 18,
@@ -35,12 +35,6 @@ class NoteWidget extends StatelessWidget {
                   )
                 ),
                 const SizedBox(height: 8.0),
-                // Text(
-                //   note.content ?? "",
-                //   style: const TextStyle(
-                //     color: AppThemes.primary,
-                //   )
-                // ),
                 const SizedBox(height: 15.0),
               ],
             ),

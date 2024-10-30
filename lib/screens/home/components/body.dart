@@ -1,5 +1,5 @@
 import 'package:NoteHub/app_localizations.dart';
-import 'package:NoteHub/providers/blocs/notes_bloc/note.dart';
+import 'package:NoteHub/blocs/notes_bloc/note.dart';
 import 'package:NoteHub/themes/app_themes.dart';
 import 'package:NoteHub/widgets/widgets.dart';
 import 'package:flutter/material.dart';

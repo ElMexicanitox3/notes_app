@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:NoteHub/providers/blocs/lang_bloc/language_bloc.dart';
-import 'package:NoteHub/providers/blocs/notes_bloc/note.dart';
-import 'package:NoteHub/providers/blocs/theme_bloc/theme.dart';
+import 'package:NoteHub/blocs/lang_bloc/language_bloc.dart';
+import 'package:NoteHub/blocs/notes_bloc/note.dart';
+import 'package:NoteHub/blocs/theme_bloc/theme.dart';
 import 'package:NoteHub/screens/about/about.dart';
 import 'package:NoteHub/screens/screens.dart';
 import 'package:NoteHub/models/note_model.dart';

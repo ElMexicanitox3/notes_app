@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:NoteHub/providers/blocs/notes_bloc/note_bloc.dart';
-import 'package:NoteHub/providers/blocs/notes_bloc/note_event.dart';
-import 'package:NoteHub/providers/blocs/notes_bloc/note_state.dart';
+import 'package:NoteHub/blocs/notes_bloc/note_bloc.dart';
+import 'package:NoteHub/blocs/notes_bloc/note_event.dart';
+import 'package:NoteHub/blocs/notes_bloc/note_state.dart';
 import 'package:NoteHub/themes/app_themes.dart';
 import 'package:NoteHub/app_localizations.dart';
 

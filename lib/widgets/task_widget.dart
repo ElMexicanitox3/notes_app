@@ -5,7 +5,9 @@ class TaskWidget extends StatefulWidget {
   final String task;
   final bool isDone;
   final Function(bool) onCheck;
-  const TaskWidget({super.key, required this.task, required this.isDone, required this.onCheck});
+  final Function() onDelete;
+  final Function(String) onUpdate;
+  const TaskWidget({super.key, required this.task, required this.isDone, required this.onCheck, required this.onDelete, required this.onUpdate});
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -14,9 +16,6 @@ class TaskWidget extends StatefulWidget {
 class _TaskWidgetState extends State<TaskWidget> {
 
   final TextEditingController _controller = TextEditingController();
-  bool _isDone = false;
-  // Function when the checkbox change or push
-  
   
   @override
   void initState() {
@@ -28,18 +27,11 @@ class _TaskWidgetState extends State<TaskWidget> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // Checkbox(value: widget.isDone, onChanged: (e){}),
-        InkWell(
-          onTap: (){
-            setState(() {
-              _isDone = !_isDone;
-              widget.onCheck(_isDone);
-            });
-          },
-        ),
+        Checkbox(value: widget.isDone, onChanged: (e)=> widget.onCheck(e!)),
         Expanded(
           child: TextField(
             controller: _controller,
+            onChanged: (value) => widget.onUpdate(value),
             decoration: const InputDecoration(
               hintText: "Task",
               border: InputBorder.none,
@@ -48,7 +40,7 @@ class _TaskWidgetState extends State<TaskWidget> {
         ),
         IconButton(
           icon: Icon(Icons.close),
-          onPressed: () => {},
+          onPressed: () => widget.onDelete(),
         ),
       ],
     );
