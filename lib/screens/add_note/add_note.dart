@@ -1,6 +1,6 @@
 import 'package:NoteHub/app_localizations.dart';
 import 'package:NoteHub/helpers/helpers.dart';
-import 'package:NoteHub/providers/blocs/blocs.dart';
+import 'package:NoteHub/blocs/blocs.dart';
 import 'package:NoteHub/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:NoteHub/models/note_model.dart';

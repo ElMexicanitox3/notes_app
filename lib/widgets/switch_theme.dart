@@ -1,4 +1,4 @@
-import 'package:NoteHub/providers/blocs/theme_bloc/theme.dart';
+import 'package:NoteHub/blocs/theme_bloc/theme.dart';
 import 'package:NoteHub/themes/app_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

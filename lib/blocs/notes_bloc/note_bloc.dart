@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:NoteHub/models/note_model.dart';
-import 'package:NoteHub/providers/blocs/notes_bloc/note_event.dart';
-import 'package:NoteHub/providers/blocs/notes_bloc/note_state.dart';
-import 'package:NoteHub/providers/sqflite/connection.dart';
+import 'package:NoteHub/blocs/notes_bloc/note_event.dart';
+import 'package:NoteHub/blocs/notes_bloc/note_state.dart';
+import 'package:NoteHub/sqflite/connection.dart';
 
 class NotesBloc extends Bloc<NoteEvent, NoteState>{
   

@@ -1,10 +1,10 @@
 import 'package:NoteHub/app_localizations.dart';
-import 'package:NoteHub/providers/blocs/lang_bloc/language_bloc.dart';
+import 'package:NoteHub/blocs/lang_bloc/language_bloc.dart';
 import 'package:NoteHub/widgets/switch_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../providers/blocs/theme_bloc/theme.dart';
+import '../../blocs/theme_bloc/theme.dart';
 
 class ConfigScreen extends StatelessWidget {
   const ConfigScreen({super.key});
