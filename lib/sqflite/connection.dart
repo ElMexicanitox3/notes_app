@@ -58,8 +58,6 @@ class DBProvider {
   // Insert a new note
   Future<int> insertNote(Note note) async {
     final db = await instance.database;
-//     Exception has occurred.
-// PlatformException (PlatformException(sqlite_error, java.util.HashMap cannot be cast to java.lang.Integer, {arguments: [xdd, 2024-07-15 21:50:37.046444, 2024-07-15 21:50:37.054804, [{text: xd, type: text}]], sql: INSERT INTO notes (id, title, created_at, updated_at, contents) VALUES (NULL, ?, ?, ?, ?)}, null))
     return await db.insert('notes', note.toJson());
   }
 

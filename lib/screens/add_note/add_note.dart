@@ -19,7 +19,6 @@ class AddNote extends StatefulWidget {
 class _AddNoteState extends State<AddNote> {
 
   final TextEditingController _titleController = TextEditingController();
-  final List<TextEditingController> _textControllers = [];
   final List<NoteContent> _contents = [];
 
   @override
@@ -30,13 +29,9 @@ class _AddNoteState extends State<AddNote> {
       _titleController.text = widget.updateNote!.title;
       for (var content in widget.updateNote!.content) {
         _contents.add(content);
-        if (content is TextContent) {
-          _textControllers.add(TextEditingController(text: content.text));
-        }
       }
     } else {
       _contents.add(TextContent(""));
-      _textControllers.add(TextEditingController());
     }
 
   }
@@ -109,17 +104,32 @@ class _AddNoteState extends State<AddNote> {
                 ...List.generate(_contents.length, (index) {
                   final content = _contents[index];
                   if (content is TextContent) {
-                    return TextField(
-                      controller: _textControllers[index],
-                      maxLines: null,
-                      decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context).translate('content_note'),
-                        border: InputBorder.none,
-                      ),
-                      keyboardType: TextInputType.multiline,
-                      onChanged: (value) {
-                        _contents[index] = TextContent(value);
-                      },
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            // controller: _textControllers[index],
+                            maxLines: null,
+                            initialValue: content.text,
+                            decoration: InputDecoration(
+                              hintText: AppLocalizations.of(context).translate('content_note'),
+                              border: InputBorder.none,
+                            ),
+                            keyboardType: TextInputType.multiline,
+                            onChanged: (value) {
+                              _contents[index] = TextContent(value);
+                            },
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.close),
+                          onPressed: () {
+                            setState(() {
+                              _contents.removeAt(index);
+                            });
+                          },
+                        ),
+                      ],
                     );
                   } else if (content is TaskContent) {
                     return TaskWidget(
@@ -156,16 +166,14 @@ class _AddNoteState extends State<AddNote> {
               icon: Icon(Icons.text_fields),
               onPressed: () {
 
-                // si el ultimo contenido es un texto, no añadir otro
-                if (_contents.last is TextContent) {
+                if (_contents.isNotEmpty && _contents.last is TextContent) {
                   return;
                 }
 
-
                 setState(() {
                   _contents.add(TextContent(""));
-                  _textControllers.add(TextEditingController());
                 });
+
               },
             ),
             IconButton(
@@ -173,7 +181,6 @@ class _AddNoteState extends State<AddNote> {
               onPressed: () {
                 setState(() {
                   _contents.add(TaskContent(description: "", isDone: false));
-                  _textControllers.add(TextEditingController());
                 });
               },
             ),

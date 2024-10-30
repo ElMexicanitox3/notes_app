@@ -1,3 +1,4 @@
+import 'package:NoteHub/themes/app_themes.dart';
 import 'package:flutter/material.dart';
 
 class TaskWidget extends StatefulWidget {
@@ -27,7 +28,11 @@ class _TaskWidgetState extends State<TaskWidget> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Checkbox(value: widget.isDone, onChanged: (e)=> widget.onCheck(e!)),
+        Checkbox(
+          value: widget.isDone, 
+          onChanged: (e)=> widget.onCheck(e!),
+          activeColor: AppThemes.primary,
+        ),
         Expanded(
           child: TextField(
             controller: _controller,
