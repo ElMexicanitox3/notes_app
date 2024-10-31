@@ -61,7 +61,7 @@ class AboutScreen  extends StatelessWidget {
                       
                       children: [
                         Text("Notes App", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        Text("Version 1.1.1", style: TextStyle( fontSize: 15)),
+                        Text("Version 1.2.0", style: TextStyle( fontSize: 15)),
                       ],
                     ),
                   )
