@@ -62,7 +62,11 @@ class _AddNoteState extends State<AddNote> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: true,
-      onPopInvoked: (didPop) => _save(context),
+      onPopInvokedWithResult: (e,d){
+        if(e){
+          _save(context);
+        }
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Column(
