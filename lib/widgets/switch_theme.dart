@@ -11,7 +11,7 @@ class SwitchThemeCustom extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
       return Switch(
         activeThumbImage: const AssetImage("lib/assets/img/moon.png"),
-        activeColor: AppThemes.secondary,
+        activeThumbColor: AppThemes.secondary,
         activeTrackColor: AppThemes.secondary,
         inactiveThumbImage: const AssetImage("lib/assets/img/sun.png"),
         inactiveThumbColor: AppThemes.secondary,
